@@ -1,1 +1,76 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Universal Clock</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Courier New', Courier, monospace; /* Monospaced keeps numbers from jumping */
+            transition: background-color 1s ease;
+            overflow: hidden; /* Prevents scrollbars on TVs */
+        }
+
+        .neutral-bg {
+            background-color: #1a1a1a;
+            color: #eeeeee;
+        }
+
+        .warning-bg {
+            background-color: #d32f2f;
+            color: #ffffff;
+        }
+
+        #clock {
+            /* 22vw means 22% of the viewport width. 
+               This ensures it scales perfectly on any screen size. */
+            font-size: 22vw; 
+            font-weight: 900;
+            line-height: 1;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        /* Adjustments for vertical screens (Phones) */
+        @media (orientation: portrait) {
+            #clock {
+                font-size: 18vw;
+                /* Rotates the text or stacks it if you prefer, 
+                   but usually, smaller vw is enough for portrait. */
+            }
+        }
+    </style>
+</head>
+<body class="neutral-bg">
+
+    <div id="clock">00:00:00</div>
+
+    <script>
+        function updateClock() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = now.getMinutes();
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+
+            document.getElementById('clock').textContent = `${hours}:${String(minutes).padStart(2, '0')}:${seconds}`;
+
+            const body = document.body;
+            // 50-59 mins (before) and 00-09 mins (after)
+            if (minutes >= 50 || minutes < 10) {
+                body.className = 'warning-bg';
+            } else {
+                body.className = 'neutral-bg';
+            }
+        }
+
+        updateClock();
+        setInterval(updateClock, 1000);
+    </script>
+</body>
+</html>
