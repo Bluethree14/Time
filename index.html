@@ -4,11 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Responsive Universal Clock</title>
+    <title>Warning Clock</title>
     <style>
         body {
-            margin: 0;
-            height: 100vh;
+            margin: 22;
+            height: 300vh;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -30,8 +30,8 @@
         #clock {
             /* 22vw means 22% of the viewport width. 
                This ensures it scales perfectly on any screen size. */
-            font-size: 22vw; 
-            font-weight: 900;
+            font-size: 10vw; 
+            font-weight: 700;
             line-height: 1;
             text-align: center;
             white-space: nowrap;
@@ -40,7 +40,7 @@
         /* Adjustments for vertical screens (Phones) */
         @media (orientation: portrait) {
             #clock {
-                font-size: 18vw;
+                font-size: 15vw;
                 /* Rotates the text or stacks it if you prefer, 
                    but usually, smaller vw is enough for portrait. */
             }
